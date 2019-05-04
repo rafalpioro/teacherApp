@@ -1,7 +1,7 @@
 package pl.pioro.teacherrestapi.entity;
 
 import javax.persistence.*;
-import java.sql.Time;
+
 
 @Entity(name ="students")
 public class Student {

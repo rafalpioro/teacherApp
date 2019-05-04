@@ -2,9 +2,9 @@ package pl.pioro.teacherrestapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.pioro.teacherrestapi.entity.Section;
+
 import pl.pioro.teacherrestapi.entity.Subject;
-import pl.pioro.teacherrestapi.repository.SectionRepository;
+
 import pl.pioro.teacherrestapi.repository.SubjectRepository;
 
 import javax.transaction.Transactional;
