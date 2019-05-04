@@ -10,7 +10,7 @@ CREATE TABLE `teacher_app`.`students` (
   `aim` TEXT(10) NULL,
   `times_weekly` INT NULL,
   `day_of_week` VARCHAR(45) NULL,
-  `time` TIME NULL,
+  `time` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
 
 CREATE TABLE `teacher_app`.`sections` (
@@ -32,8 +32,9 @@ CREATE TABLE `teacher_app`.`subjects` (
 
 CREATE TABLE `teacher_app`.`lessons` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `date` DATE NULL,
   `day_of_week` VARCHAR(45) NULL,
-  `category_id` INT NULL,
+  `section_id` INT NULL,
   `subject_id` INT NULL,
   `content` TEXT(10) NULL,
   `assignment` TEXT(10) NULL,

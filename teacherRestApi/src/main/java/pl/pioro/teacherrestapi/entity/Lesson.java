@@ -15,7 +15,7 @@ public class Lesson {
     private Date date;
 
     @Column(name = "day_of_week")
-    private Column dayOfWeek;
+    private String dayOfWeek;
 
     @OneToOne
     @JoinColumn(name="section_id", referencedColumnName = "id")
@@ -29,7 +29,7 @@ public class Lesson {
     private String content;
 
     @Column(name = "assignment")
-    private int assignment;
+    private String assignment;
 
     @Column(name = "materials")
     private String materials;
@@ -61,11 +61,11 @@ public class Lesson {
         this.date = date;
     }
 
-    public Column getDayOfWeek() {
+    public String getDayOfWeek() {
         return dayOfWeek;
     }
 
-    public void setDayOfWeek(Column dayOfWeek) {
+    public void setDayOfWeek(String dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
     }
 
@@ -77,11 +77,11 @@ public class Lesson {
         this.content = content;
     }
 
-    public int getAssignment() {
+    public String getAssignment() {
         return assignment;
     }
 
-    public void setAssignment(int assignment) {
+    public void setAssignment(String assignment) {
         this.assignment = assignment;
     }
 

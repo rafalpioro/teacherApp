@@ -36,7 +36,7 @@ public class Student {
     private String dayOfWeek;
 
     @Column(name = "time")
-    private Time time;
+    private String time;
 
 
     public Student(){
@@ -115,11 +115,11 @@ public class Student {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }
