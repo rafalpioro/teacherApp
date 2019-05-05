@@ -2,9 +2,12 @@ package pl.pioro.teacherrestapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import pl.pioro.teacherrestapi.entity.Section;
 import pl.pioro.teacherrestapi.entity.Student;
 import pl.pioro.teacherrestapi.entity.Subject;
@@ -16,43 +19,35 @@ import pl.pioro.teacherrestapi.repository.SectionRepository;
 import pl.pioro.teacherrestapi.repository.StudentRepository;
 import pl.pioro.teacherrestapi.service.StudentPaginationService;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
+import java.util.List;
 
 
 @RestController
-@RequestMapping(path = "/student", produces = "application/json")
+@RequestMapping(path = "/students", produces = "application/json")
 @CrossOrigin(maxAge = 3600)
 @Transactional
 public class StudentController {
 
     @Autowired
-    private StudentPaginationService studentPaginationService;
+    private StudentRepository studentRepository;
 
-    @GetMapping(params = {"filter", "sortOrder", "pageNumber", "pageSize"})
-    @ResponseBody
-    public Page<Student> findAll(@RequestParam("filter") String filter,
-                                 @RequestParam("sortOrder") String sortOrder, @RequestParam("pageNumber") int pageNumber,
-                                 @RequestParam("pageSize") int pageSize) {
-        if (!(sortOrder.equals(SortOrder.ASCENDING.getSortCode())
-                || sortOrder.equals(SortOrder.DESCENDING.getSortCode()))) {
-            throw new PaginationSortingException("Invalid sort direction");
-        }
+    @GetMapping(params = {"page", "size"})
+    public Page<Student> findAllPaginated(@RequestParam("page") int page , @RequestParam("size") int size) {
 
+        Pageable findElements = PageRequest.of(page, size);
 
-        if (!(filter.equals(Filter.ID.getOrderByCode()) || filter.equals(Filter.AGE.getOrderByCode()))) {
-            throw new PaginationSortingException("Invalid orderBy condition");
-        }
+        Pageable secondPageWithFiveElements = PageRequest.of(1, 5);
 
-        Page<Student> list = studentPaginationService.findStudentsByCondition(filter, sortOrder, pageNumber, pageSize);
-        return list;
+        Page<Student> allStudebts = studentRepository.findAll(findElements);
+
+        return allStudebts;
 
     }
 
-
-    public ResponseEntity<PagingSortingErrorResponse> exceptionHandler(Exception ex) {
-        PagingSortingErrorResponse pagingSortingErrorResponse = new PagingSortingErrorResponse();
-        pagingSortingErrorResponse.setErrorCode(HttpStatus.PRECONDITION_FAILED.value());
-        pagingSortingErrorResponse.setMessage(ex.getMessage());
-        return new ResponseEntity<PagingSortingErrorResponse>(pagingSortingErrorResponse, HttpStatus.OK);//
+    @GetMapping
+    public Iterable<Student> allStudents(){
+        return studentRepository.findAll();
     }
 }

@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 
 
 @RestController
-@RequestMapping(path = "/subject", produces = "application/json")
+@RequestMapping(path = "/subjects", produces = "application/json")
 @CrossOrigin
 @Transactional
 public class SubjectController {

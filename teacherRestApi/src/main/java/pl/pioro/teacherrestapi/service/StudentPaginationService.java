@@ -19,15 +19,15 @@ public class StudentPaginationService {
     public Page<Student> findStudentsByCondition(String filter, String sortOrder, int pageNumber, int pageSize) {
 
         Sort sort = null;
-        if (filter.equals("ASC")) {
-            sort = new Sort(new Sort.Order(Sort.Direction.ASC, filter));
+        if (sortOrder.equals("ASC")) {
+            sort = new Sort(Sort.Direction.ASC, filter);
         }
 
-        if (filter.equals("DESC")) {
-            sort = new Sort(new Sort.Order(Sort.Direction.DESC, filter));
+        if (sortOrder.equals("DESC")) {
+            sort = new Sort(Sort.Direction.DESC, filter);
         }
 
-        Pageable pageable = new PageRequest(pageNumber, pageSize, sort);
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
 
         Page<Student> data = studentRepository.findAll(pageable);
         return data;

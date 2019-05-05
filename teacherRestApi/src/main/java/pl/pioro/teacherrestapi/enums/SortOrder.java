@@ -5,8 +5,8 @@ public enum SortOrder {
     ASCENDING("ASC"), DESCENDING("DESC");
 
     private final String sortCode;
-    private SortOrder(String direction) {
-        this.sortCode = direction;
+    private SortOrder(String sortCode) {
+        this.sortCode = sortCode;
     }
     public String getSortCode() {
         return this.sortCode;
