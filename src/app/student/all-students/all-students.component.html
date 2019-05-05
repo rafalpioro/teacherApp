@@ -1,0 +1,92 @@
+
+<!--<div class="mt-2 mb-2 p-3">-->
+  <!--<table class="table">-->
+    <!--<thead>-->
+      <!--<tr>-->
+        <!--<th scope="col">Id</th>-->
+        <!--<th scope="col">Name</th>-->
+        <!--<th scope="col">Surname</th>-->
+        <!--<th scope="col">Birtdate</th>-->
+        <!--<th scope="col">Cars</th>-->
+
+      <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+      <!--<tr *ngFor = "let student of students">-->
+        <!--<td>{{student.id}}</td>-->
+        <!--<td>{{student.name}}</td>-->
+        <!--<td>{{student.surname}}</td>-->
+        <!--<td>{{student.age}}</td>-->
+      <!--</tr>-->
+    <!--</tbody>-->
+  <!--</table>-->
+<!--</div>-->
+
+
+
+<!--<div>-->
+  <!--<mat-table [dataSource]="dataSource">-->
+    <!--<ng-container matColumnDef="id">-->
+      <!--<mat-header-cell *matHeaderCellDef> ID </mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let student"> {{student.id}} </mat-cell>-->
+    <!--</ng-container>-->
+    <!--<ng-container matColumnDef="name">-->
+      <!--<mat-header-cell *matHeaderCellDef> name </mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let student"> {{student.name}} </mat-cell>-->
+    <!--</ng-container>-->
+    <!--<ng-container matColumnDef="surname">-->
+      <!--<mat-header-cell *matHeaderCellDef> Surname </mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let student"> {{student.surname}} </mat-cell>-->
+    <!--</ng-container>-->
+    <!--<ng-container matColumnDef="age">-->
+      <!--<mat-header-cell *matHeaderCellDef> Age </mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let student"> {{student.age}} </mat-cell>-->
+    <!--</ng-container>-->
+    <!--<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>-->
+    <!--<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
+  <!--</mat-table>-->
+<!--</div>-->
+
+
+
+
+
+<div >
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+  <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>id</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{student.id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>name</mat-header-cell>
+      <mat-cell class="description-cell"
+                *matCellDef="let student">{{student.name}}</mat-cell>
+
+    </ng-container>
+
+    <ng-container matColumnDef="surname">
+      <mat-header-cell *matHeaderCellDef>surname</mat-header-cell>
+      <mat-cell class="duration-cell"
+                *matCellDef="let student">{{student.surname}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="age">
+      <mat-header-cell *matHeaderCellDef>age</mat-header-cell>
+      <mat-cell class="duration-cell"
+                *matCellDef="let student">{{student.age}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns">
+    </mat-row>
+
+  </mat-table>
+  <mat-paginator [length]="total_count" [pageSize]="3"
+                 [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
+</div>
