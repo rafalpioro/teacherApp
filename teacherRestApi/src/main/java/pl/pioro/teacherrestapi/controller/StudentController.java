@@ -50,4 +50,14 @@ public class StudentController {
     public Iterable<Student> allStudents(){
         return studentRepository.findAll();
     }
+
+    @PostMapping (consumes = "application/json")
+    public Student create(@RequestBody Student student){
+        return studentRepository.save(student);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public void delete(@PathVariable("id") int id){
+        this.studentRepository.deleteById(id);
+    }
 }
