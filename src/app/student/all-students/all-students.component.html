@@ -48,10 +48,16 @@
 <!--</div>-->
 
 
+<div class="container add-button">
+  <button (click)="addStudent()" type="submit"  class="btn btn-info float-right ">
+        <i class="fa fa-plus"></i>
+        <span> Dodaj ucznia</span>
+  </button>
+</div>
 
 
 
-<div >
+<div class="container tbn">
   <div class="spinner-container" *ngIf="dataSource.loading$ | async">
     <mat-spinner></mat-spinner>
   </div>
@@ -63,22 +69,46 @@
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef>name</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Imię</mat-header-cell>
       <mat-cell class="description-cell"
                 *matCellDef="let student">{{student.name}}</mat-cell>
-
     </ng-container>
 
     <ng-container matColumnDef="surname">
-      <mat-header-cell *matHeaderCellDef>surname</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Nazwisko</mat-header-cell>
       <mat-cell class="duration-cell"
                 *matCellDef="let student">{{student.surname}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="age">
-      <mat-header-cell *matHeaderCellDef>age</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Wiek</mat-header-cell>
       <mat-cell class="duration-cell"
                 *matCellDef="let student">{{student.age}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="timesWeekly">
+      <mat-header-cell *matHeaderCellDef>Ile razy w tyg.</mat-header-cell>
+      <mat-cell class="duration-cell"
+                *matCellDef="let student">{{student.timesWeekly}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dayOfWeek">
+      <mat-header-cell *matHeaderCellDef>Termin zajęć</mat-header-cell>
+      <mat-cell class="duration-cell"
+                *matCellDef="let student">{{student.dayOfWeek}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+      <mat-header-cell *matHeaderCellDef>Godzina</mat-header-cell>
+      <mat-cell class="duration-cell"
+                *matCellDef="let student">{{student.time}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Edycja</mat-header-cell>
+      <mat-cell *matCellDef="let student" >
+        <button (click)="deleteStudent(student)" class="btn btn-danger button"><i class="fa fa-trash"></i></button>
+        <button (click)="editedStudent(student)"class="btn btn-primary button"><i class="fa fa-pencil"></i></button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -87,6 +117,6 @@
     </mat-row>
 
   </mat-table>
-  <mat-paginator [length]="total_count" [pageSize]="3"
+  <mat-paginator [length]="total_count" [pageSize]="5"
                  [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
 </div>

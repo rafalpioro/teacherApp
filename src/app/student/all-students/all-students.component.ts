@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {Student} from "../../model/student";
 import {tap} from "rxjs/operators";
 import {MatPaginator} from "@angular/material";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-all-students',
@@ -16,15 +17,16 @@ export class AllStudentsComponent implements AfterViewInit, OnInit {
 
 
   dataSource: StudentsDatasource;
-  displayedColumns = ["id", "name", "surname","age"];
+  displayedColumns = ["id", "name", "surname","age", "timesWeekly", "dayOfWeek", "time", "edit"];
+
   public total_count: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private studentsService: ApiStudentService) { }
+  constructor(private studentsService: ApiStudentService, private router: Router) { }
 
   ngOnInit() {
-    this.dataSource = new StudentsDatasource(this.studentsService)
+    this.dataSource = new StudentsDatasource(this.studentsService);
     this.dataSource.loadStudent(0,5);
     this.studentsService.allStudents().subscribe(res=>{this.total_count = res.length});
     console.log(this.total_count);
@@ -43,6 +45,23 @@ export class AllStudentsComponent implements AfterViewInit, OnInit {
       this.paginator.pageIndex,
       this.paginator.pageSize);
   }
+
+  addStudent(){
+    this.router.navigate(['students/add-student']);
+  }
+
+  deleteStudent(student: Student){
+    if(confirm("Na pewno chcesz usunąć studenta?")){
+      this.studentsService.deleteStudent(student.id).subscribe(
+        res =>{
+          this.studentsService.allStudents().subscribe(res=>{this.total_count = res.length});
+          this.loadLessonsPage();
+        },
+        err=>{alert("Could not delete client")}
+      );
+    }
+  }
+
 
 }
 

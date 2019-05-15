@@ -14,7 +14,7 @@ export class ApiStudentService {
   constructor(private http:HttpClient) {}
 
   findStudents(
-    page = 1, size = 3):  Observable<Student[]> {
+    page = 1, size = 5):  Observable<Student[]> {
 
     return this.http.get<Student[]>(this.URL, {
       params: new HttpParams()
@@ -26,5 +26,13 @@ export class ApiStudentService {
 
   allStudents(): Observable<Student[]>{
     return this.http.get<[]>(this.URL);
+  }
+
+  addNewStudent(student: Student):Observable<any>{
+    return this.http.post<Student[]>(this.URL, student);
+  }
+
+  deleteStudent(id: number):Observable<any>{
+    return this.http.delete(this.URL+"/"+id);
   }
 }

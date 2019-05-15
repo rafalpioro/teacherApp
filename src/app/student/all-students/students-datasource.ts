@@ -1,10 +1,7 @@
 import {CollectionViewer, DataSource} from "@angular/cdk/collections";
-
 import {Student} from "../../model/student";
-
 import {ApiStudentService} from "../../shared/api-student.service";
 import {catchError, finalize} from "rxjs/operators";
-
 import {BehaviorSubject, Observable, of} from "rxjs";
 
 export class StudentsDatasource implements DataSource<Student>{
@@ -36,4 +33,5 @@ export class StudentsDatasource implements DataSource<Student>{
     )
       .subscribe(student => {this.studentSubject.next(student["content"])});
   }
+
 }
