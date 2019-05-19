@@ -1,27 +1,15 @@
 package pl.pioro.teacherrestapi.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
-import pl.pioro.teacherrestapi.entity.Section;
 import pl.pioro.teacherrestapi.entity.Student;
-import pl.pioro.teacherrestapi.entity.Subject;
-import pl.pioro.teacherrestapi.enums.Filter;
-import pl.pioro.teacherrestapi.enums.SortOrder;
-import pl.pioro.teacherrestapi.exception.PaginationSortingException;
-import pl.pioro.teacherrestapi.exception.PagingSortingErrorResponse;
-import pl.pioro.teacherrestapi.repository.SectionRepository;
 import pl.pioro.teacherrestapi.repository.StudentRepository;
-import pl.pioro.teacherrestapi.service.StudentPaginationService;
-
-import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
-import java.util.List;
+
 
 
 @RestController
@@ -51,6 +39,11 @@ public class StudentController {
         return studentRepository.findAll();
     }
 
+    @GetMapping(path = "/{id}")
+    public Student findStudentById(@PathVariable("id") int id){
+        return studentRepository.findById(id);
+    }
+
     @PostMapping (consumes = "application/json")
     public Student create(@RequestBody Student student){
         return studentRepository.save(student);
@@ -59,5 +52,21 @@ public class StudentController {
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable("id") int id){
         this.studentRepository.deleteById(id);
+    }
+
+    @PutMapping(path = "/{id}", consumes = "application/json")
+    public Student updateStudent(@PathVariable("id") int id, @RequestBody Student student){
+        Student studentUpdated = studentRepository.findById(id);
+        studentUpdated.setName(student.getName());
+        studentUpdated.setSurname(student.getSurname());
+        studentUpdated.setAge(student.getAge());
+        studentUpdated.setAim(student.getAim());
+        studentUpdated.setClas(student.getClas());
+        studentUpdated.setDayOfWeek(student.getDayOfWeek());
+        studentUpdated.setKnowledgeLevel(student.getKnowledgeLevel());
+        studentUpdated.setTime(student.getTime());
+
+        return this.studentRepository.save(studentUpdated);
+
     }
 }

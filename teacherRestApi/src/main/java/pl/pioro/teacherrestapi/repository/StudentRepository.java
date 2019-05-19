@@ -12,4 +12,5 @@ import java.util.List;
 public interface StudentRepository extends PagingAndSortingRepository<Student, Integer> {
 
     List<Student> findAllByAge(int age, Pageable pageable);
+    Student findById(int id);
 }
