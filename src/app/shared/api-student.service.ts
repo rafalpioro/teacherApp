@@ -35,4 +35,12 @@ export class ApiStudentService {
   deleteStudent(id: number):Observable<any>{
     return this.http.delete(this.URL+"/"+id);
   }
+
+  getStudentById(id: number): Observable<Student>{
+    return this.http.get<Student>(this.URL +"/"+id);
+  }
+
+  updateStudent(student: Student): Observable<any>{
+    return this.http.put(this.URL +"/"+student.id,student);
+  }
 }

@@ -5,8 +5,9 @@ import {DataSource} from "@angular/cdk/table";
 import {Observable} from "rxjs";
 import {Student} from "../../model/student";
 import {tap} from "rxjs/operators";
-import {MatPaginator} from "@angular/material";
+import {MatDialog, MatDialogConfig, MatPaginator} from "@angular/material";
 import {Router} from "@angular/router";
+import {EditStudentComponent} from "../edit-student/edit-student.component";
 
 @Component({
   selector: 'app-all-students',
@@ -17,19 +18,20 @@ export class AllStudentsComponent implements AfterViewInit, OnInit {
 
 
   dataSource: StudentsDatasource;
-  displayedColumns = ["id", "name", "surname","age", "timesWeekly", "dayOfWeek", "time", "edit"];
+  displayedColumns = ["id", "name", "surname","age", "clas", "timesWeekly", "dayOfWeek", "time", "edit"];
 
   public total_count: number;
+  data:Student;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private studentsService: ApiStudentService, private router: Router) { }
+  constructor(private studentsService: ApiStudentService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.dataSource = new StudentsDatasource(this.studentsService);
     this.dataSource.loadStudent(0,5);
     this.studentsService.allStudents().subscribe(res=>{this.total_count = res.length});
-    console.log(this.total_count);
+
   }
 
   ngAfterViewInit() {
@@ -61,6 +63,37 @@ export class AllStudentsComponent implements AfterViewInit, OnInit {
       );
     }
   }
+
+  editedStudent(student: Student){
+
+  }
+
+  openDialog(student: Student): void {
+
+    const dialogConfig = new MatDialogConfig();
+
+      this.studentsService.getStudentById(student.id).subscribe(res => {
+        this.data = student;
+
+
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = this.data;
+        console.log(dialogConfig.data);
+        this.dialog.open(EditStudentComponent, dialogConfig);
+        //
+        const dialogRef = this.dialog.open(EditStudentComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(data => this.studentsService.updateStudent(student).subscribe(res=>{
+          this.loadLessonsPage();
+        }));
+      }, error1 => {
+        alert("Alert form openDialog")
+      });
+      console.log(this.data);
+
+    }
 
 
 }

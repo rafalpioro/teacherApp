@@ -86,6 +86,12 @@
                 *matCellDef="let student">{{student.age}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="clas">
+      <mat-header-cell *matHeaderCellDef>Klasa</mat-header-cell>
+      <mat-cell class="duration-cell"
+                *matCellDef="let student">{{student.clas}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="timesWeekly">
       <mat-header-cell *matHeaderCellDef>Ile razy w tyg.</mat-header-cell>
       <mat-cell class="duration-cell"
@@ -107,7 +113,7 @@
       <mat-header-cell *matHeaderCellDef>Edycja</mat-header-cell>
       <mat-cell *matCellDef="let student" >
         <button (click)="deleteStudent(student)" class="btn btn-danger button"><i class="fa fa-trash"></i></button>
-        <button (click)="editedStudent(student)"class="btn btn-primary button"><i class="fa fa-pencil"></i></button>
+        <button (click)="openDialog(student)"class="btn btn-primary button"><i class="fa fa-pencil"></i></button>
       </mat-cell>
     </ng-container>
 

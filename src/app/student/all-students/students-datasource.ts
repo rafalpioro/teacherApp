@@ -14,7 +14,6 @@ export class StudentsDatasource implements DataSource<Student>{
 
   connect(collectionViewer: CollectionViewer): Observable<Student[]> {
     return this.studentSubject.asObservable();
-    console.log(this.studentSubject);
   }
 
   disconnect(collectionViewer: CollectionViewer): void {
