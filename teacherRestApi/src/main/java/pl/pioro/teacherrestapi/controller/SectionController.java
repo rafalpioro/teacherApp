@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 
 
 @RestController
-@RequestMapping(path = "/section", produces = "application/json")
+@RequestMapping(path = "/sections", produces = "application/json")
 @CrossOrigin
 @Transactional
 public class SectionController {
@@ -30,5 +30,10 @@ public class SectionController {
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable("id") int id){
         sectionRepository.deleteById(id);
+    }
+
+    @GetMapping(path = "/{id}")
+    public Section findById(@PathVariable("id") int id){
+        return sectionRepository.findById(id);
     }
 }

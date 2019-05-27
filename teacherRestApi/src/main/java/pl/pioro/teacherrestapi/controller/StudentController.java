@@ -21,16 +21,21 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
-    @GetMapping(params = {"page", "size"})
-    public Page<Student> findAllPaginated(@RequestParam("page") int page , @RequestParam("size") int size) {
+    @GetMapping(params = {"page", "size", "name"})
+    public Page<Student> findAllPaginated(@RequestParam("page") int page , @RequestParam("size") int size, @RequestParam("name") String name) {
 
         Pageable findElements = PageRequest.of(page, size);
 
         Pageable secondPageWithFiveElements = PageRequest.of(1, 5);
 
-        Page<Student> allStudebts = studentRepository.findAll(findElements);
+        if(name.trim().equals("")) {
+            Page<Student> allStudents = studentRepository.findAll(findElements);
 
-        return allStudebts;
+            return allStudents;
+        } else {
+            Page<Student> allStudentsByName = studentRepository.findByNameIgnoreCaseContaining(name, findElements);
+            return allStudentsByName;
+        }
 
     }
 
