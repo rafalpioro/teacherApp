@@ -55,6 +55,14 @@
   </button>
 </div>
 
+<div class="container">
+  <mat-form-field class="search-field">
+    <input matInput type="text" placeholder="Szukaj po imieniu" [(ngModel)]="search" (keydown)="loadLessonsPage()">
+    <button class="close" mat-button *ngIf="search" matSuffix mat-icon-button aria-label="Clear" (click)="search='' && loadLessonsPage()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
 
 
 <div class="container tbn">

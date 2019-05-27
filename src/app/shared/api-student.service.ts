@@ -14,13 +14,14 @@ export class ApiStudentService {
   constructor(private http:HttpClient) {}
 
   findStudents(
-    page = 1, size = 5):  Observable<Student[]> {
+    page = 1, size = 5, name = ''):  Observable<Student[]> {
 
     return this.http.get<Student[]>(this.URL, {
       params: new HttpParams()
 
         .append('page', page.toString())
         .append('size', size.toString())
+        .append('name', name.toString())
     })
   }
 

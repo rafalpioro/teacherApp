@@ -1,3 +1,19 @@
-<p>
-  section works!
-</p>
+<div class="container">
+  <div class="float-right">
+    <button (click)="openDialogNewSection()"class="btn btn-success btn-section"><i class="fa fa-plus"></i> Dodaj nowy rozdział</button>
+  </div>
+
+
+  <div class="" *ngFor="let section of allSections" >
+    <mat-list>
+      <h4 mat-subheader>{{section.name}}   <button (click)="openDialogNewSubject(section)"class="btn btn-outline-secondary btn-sm button"><i class="fa fa-plus"></i></button> </h4>
+      <div *ngFor="let subject of section.subjects">
+      <mat-list-item >
+        <mat-icon mat-list-icon>local_florist</mat-icon>
+        <h4 mat-line>{{subject.title}}</h4>
+      </mat-list-item>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-list>
+  </div>
+</div>

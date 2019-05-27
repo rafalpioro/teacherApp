@@ -17,6 +17,10 @@ import { MenuComponent} from "./shared/menu/menu.component";
 import { FooterComponent} from "./shared/footer/footer.component";
 import { EditStudentComponent } from './student/edit-student/edit-student.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatIconModule} from '@angular/material/icon'
+import {MatListModule} from '@angular/material/list';
+import { AddNewSectionComponent } from './section/add-new-section/add-new-section.component';
+import { AddNewSubjectComponent } from './section/add-new-subject/add-new-subject.component';
 
 
 @NgModule({
@@ -31,7 +35,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AddNewStudentComponent,
     MenuComponent,
     FooterComponent,
-    EditStudentComponent
+    EditStudentComponent,
+    AddNewSectionComponent,
+    AddNewSubjectComponent
   ],
   imports: [
     BrowserModule,
@@ -46,10 +52,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     MatDialogModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [EditStudentComponent]
+  entryComponents: [EditStudentComponent, AddNewSectionComponent, AddNewSubjectComponent]
 })
 export class AppModule { }

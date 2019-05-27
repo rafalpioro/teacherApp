@@ -21,12 +21,12 @@ export class StudentsDatasource implements DataSource<Student>{
     this.loadingSubject.complete();
   }
 
-  loadStudent(page = 1, size = 5) {
+  loadStudent(page = 1, size = 5, name ='') {
 
     this.loadingSubject.next(true);
 
     this.studentService.findStudents(
-      page, size).pipe(
+      page, size, name).pipe(
       catchError(() => of([])),
       finalize(() => this.loadingSubject.next(false))
     )

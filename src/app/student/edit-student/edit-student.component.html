@@ -1,0 +1,54 @@
+
+<h2 mat-dialog-title>Edycja użytkownika <span class="green">{{student.name}} {{student.surname}}</span></h2>
+<mat-dialog-content [formGroup]="form" fxLayout="column">
+
+  <div fxLayout="row wrap" fxLayoutGap="10px" fxLayout.lt-sm="column" >
+    <mat-form-field fxFlex="auto">
+      <input matInput formControlName="name" [(ngModel)]="student.name" value={{student.name}} placeholder="Imię">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="auto">
+      <input matInput formControlName="surname" [(ngModel)]="student.surname" value={{student.surname}} placeholder="Nazwisko">
+    </mat-form-field>
+
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutGap="10px" fxLayout.lt-sm="column">
+
+    <mat-form-field fxFlex="auto">
+      <input matInput formControlName="age" type="number" [(ngModel)]="student.age" value={{student.age}} placeholder="Wiek">
+    </mat-form-field>
+    <mat-form-field fxFlex="auto">
+      <input matInput formControlName="clas" [(ngModel)]="student.clas" value={{student.clas}} placeholder="Klasa">
+    </mat-form-field>
+
+  </div>
+
+  <mat-form-field>
+    <textarea matInput formControlName="knowledgeLevel" [(ngModel)]="student.knowledgeLevel" value={{student.knowledgeLevel}} placeholder="Poziom wiedzy"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput formControlName="aim" [(ngModel)]="student.aim" value={{student.aim}} placeholder="Cel nauki"></textarea>
+  </mat-form-field>
+
+  <div fxLayout="row wrap" fxLayoutGap="10px" fxLayout.lt-sm="column">
+    <mat-form-field>
+      <input matInput formControlName="timesWeekly" type="number" [(ngModel)]="student.timesWeekly" value={{student.timesWeekly}}  placeholder="Ile razy w tygodnniu">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="dayOfWeek" [(ngModel)]="student.dayOfWeek" value={{student.dayOfWeek}} placeholder="Dzień tygodnia">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="time" [(ngModel)]="student.time" value={{student.time}} placeholder="Godzina zajęć">
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button"(click)="close()">Close</button>
+  <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+</mat-dialog-actions>
+
+
+

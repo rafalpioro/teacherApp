@@ -11,3 +11,8 @@
 .button{
   margin: 3px;
 }
+
+.close{
+  border-style: none;
+  background-color: lightgreen;
+}

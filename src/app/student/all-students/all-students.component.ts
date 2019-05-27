@@ -5,7 +5,7 @@ import {DataSource} from "@angular/cdk/table";
 import {Observable} from "rxjs";
 import {Student} from "../../model/student";
 import {tap} from "rxjs/operators";
-import {MatDialog, MatDialogConfig, MatPaginator} from "@angular/material";
+import {MatDialog, MatDialogConfig, MatFormField, MatPaginator} from "@angular/material";
 import {Router} from "@angular/router";
 import {EditStudentComponent} from "../edit-student/edit-student.component";
 
@@ -19,17 +19,19 @@ export class AllStudentsComponent implements AfterViewInit, OnInit {
 
   dataSource: StudentsDatasource;
   displayedColumns = ["id", "name", "surname","age", "clas", "timesWeekly", "dayOfWeek", "time", "edit"];
+  search: string;
 
   public total_count: number;
   data:Student;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+
   constructor(private studentsService: ApiStudentService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.dataSource = new StudentsDatasource(this.studentsService);
-    this.dataSource.loadStudent(0,5);
+    this.dataSource.loadStudent(0,5, '');
     this.studentsService.allStudents().subscribe(res=>{this.total_count = res.length});
 
   }
@@ -45,7 +47,8 @@ export class AllStudentsComponent implements AfterViewInit, OnInit {
   loadLessonsPage() {
     this.dataSource.loadStudent(
       this.paginator.pageIndex,
-      this.paginator.pageSize);
+      this.paginator.pageSize,
+      this.search);
   }
 
   addStudent(){
@@ -64,9 +67,6 @@ export class AllStudentsComponent implements AfterViewInit, OnInit {
     }
   }
 
-  editedStudent(student: Student){
-
-  }
 
   openDialog(student: Student): void {
 

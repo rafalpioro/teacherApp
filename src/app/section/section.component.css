@@ -1,0 +1,12 @@
+.button{
+  margin-left: 10px;
+}
+
+.btn-section{
+  margin-top: 10px;
+}
+
+mat-list{
+  flex-grow: 1;
+  overflow: auto;
+}
