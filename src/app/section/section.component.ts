@@ -7,10 +7,9 @@ import {Router} from "@angular/router";
 import {AddNewSubjectComponent} from "./add-new-subject/add-new-subject.component";
 import {ApiSubjectService} from "../shared/api-subject.service";
 import {Subject} from "../model/subject";
-import {DataSource} from "@angular/cdk/table";
-import {ApiStudentService} from "../shared/api-student.service";
-import {Observable} from "rxjs";
 import {Student} from "../model/student";
+import {EditSubjectComponent} from "./edit-subject/edit-subject.component";
+
 
 
 @Component({
@@ -22,11 +21,15 @@ export class SectionComponent implements OnInit {
   section: Section;
   subject: Subject;
   allSections: Section[];
-  constructor(private sectionService: ApiSectionService,  private subjectService: ApiSubjectService, public dialog: MatDialog, private router: Router) { }
+
+
+  constructor(private sectionService: ApiSectionService,  private subjectService: ApiSubjectService, public dialog: MatDialog, private router: Router) {}
+
 
   ngOnInit() {
     this.getAllSection();
   }
+
 
   getAllSection(){
     this.sectionService.findAllSections().subscribe(res=>{this.allSections = res},err=>{alert("Error has occurred while getting data")})
@@ -41,16 +44,34 @@ export class SectionComponent implements OnInit {
 
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
+      dialogConfig.data = section;
       const dialogRef = this.dialog.open(AddNewSubjectComponent, dialogConfig);
       dialogRef.afterClosed().subscribe(data => {
         this.subject=data;
         this.subject.categoryId=section.id;
-        this.subjectService.addNewSubject(this.subject).subscribe()}
+        this.subjectService.addNewSubject(this.subject).subscribe(value => this.getAllSection())}
         )
     })
+  }
+
+  openDialogEditSubject(subject: Subject){
+
+    const dialogConfig = new MatDialogConfig();
 
 
-    }
+      this.subjectService.getSubjectById(subject.id).subscribe(res =>{
+        dialogConfig.disableClose = true;
+       dialogConfig.autoFocus = true;
+        dialogConfig.data = subject;
+
+        const dialogRef = this.dialog.open(EditSubjectComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe(data => {
+          this.subject=data;
+          this.subjectService.updateSubject(this.subject).subscribe(value => this.getAllSection())}
+        )
+      });
+
+  }
 
   openDialogNewSection(): void {
 
@@ -64,20 +85,35 @@ export class SectionComponent implements OnInit {
     dialogRef.afterClosed().subscribe(data => {
         console.log(data);
         this.section = data;
-        this.sectionService.addNewSection(this.section).subscribe();
-        this.router.navigate(['']);
+        this.sectionService.addNewSection(this.section).subscribe(value => {
+          this.getAllSection();
+        });
+
     } );
 
   }
 
+  deleteSection(section: Section){
+    if(confirm("Na pewno chcesz usunąć całą sekcję?")){
+      this.sectionService.deleteSection(section.id).subscribe(
+        res =>{
+          this.getAllSection();
+        },
+        err=>{alert("Could not delete client")}
+      );
+    }
+  }
+
+  deleteSubject(subject: Subject){
+    if(confirm("Na pewno chcesz usunąć temat zajęć?")){
+      this.subjectService.deleteSubject(subject.id).subscribe(
+        res =>{
+          this.getAllSection();
+        },
+        err=>{alert("Could not delete client")}
+      );
+    }
+  }
+
 }
 
-export class SectionData extends DataSource<any> {
-  constructor(private sectionService: ApiSectionService) {
-    super();
-  }
-  connect(): Observable<Section[]> {
-    return this.sectionService.findAllSections();
-  }
-  disconnect() {}
-}

@@ -21,6 +21,7 @@ import {MatIconModule} from '@angular/material/icon'
 import {MatListModule} from '@angular/material/list';
 import { AddNewSectionComponent } from './section/add-new-section/add-new-section.component';
 import { AddNewSubjectComponent } from './section/add-new-subject/add-new-subject.component';
+import { EditSubjectComponent } from './section/edit-subject/edit-subject.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AddNewSubjectComponent } from './section/add-new-subject/add-new-subjec
     FooterComponent,
     EditStudentComponent,
     AddNewSectionComponent,
-    AddNewSubjectComponent
+    AddNewSubjectComponent,
+    EditSubjectComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +60,6 @@ import { AddNewSubjectComponent } from './section/add-new-subject/add-new-subjec
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [EditStudentComponent, AddNewSectionComponent, AddNewSubjectComponent]
+  entryComponents: [EditStudentComponent, AddNewSectionComponent, AddNewSubjectComponent, EditSubjectComponent]
 })
 export class AppModule { }

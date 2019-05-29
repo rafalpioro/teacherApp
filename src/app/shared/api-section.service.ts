@@ -26,4 +26,7 @@ export class ApiSectionService {
     return this.http.get<Section>(this.URL +"/"+id);
   }
 
+  deleteSection(id: number):Observable<any>{
+    return this.http.delete(this.URL+"/"+id);
+  }
 }

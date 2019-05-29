@@ -1,14 +1,14 @@
-<h2 mat-dialog-title>Dodaj nową lekcję do kategorii <span class="green">{{subject.categoryId}} </span></h2>
-<mat-dialog-content [formGroup]="form" fxLayout="column">
 
-  <div fxLayout="row wrap" fxLayoutGap="10px" fxLayout.lt-sm="column" >
-    <mat-form-field fxFlex="auto">
-      <input type="text" matInput formControlName="title"  placeholder="Podaj temat lekcji">
-    </mat-form-field>
 
-  </div>
 
-</mat-dialog-content>
+  <h2 mat-dialog-title>Dodaj nową lekcję do kategorii: <span style="color: green">{{section.name | uppercase}}</span></h2>
+  <mat-dialog-content [formGroup]="form" fxLayout="column">
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayout.lt-sm="column" >
+      <mat-form-field fxFlex="auto">
+        <input type="text" matInput formControlName="title"  placeholder="Podaj temat lekcji">
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
 
 <mat-dialog-actions>
   <button class="mat-raised-button"(click)="close()">Close</button>
