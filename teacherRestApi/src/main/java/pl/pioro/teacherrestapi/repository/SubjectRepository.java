@@ -6,4 +6,5 @@ import pl.pioro.teacherrestapi.entity.Subject;
 
 @RestResource
 public interface SubjectRepository extends JpaRepository<Subject, Integer> {
+    Subject findById(int id);
 }

@@ -33,4 +33,19 @@ public class SubjectController {
     public void delete(@PathVariable("id") int id){
         subjectRepository.deleteById(id);
     }
+
+    @GetMapping(path = "/{id}")
+    public Subject findById(@PathVariable("id") int id){
+        return subjectRepository.findById(id);
+    }
+
+    @PutMapping(path = "/{id}", consumes = "application/json")
+    public Subject updateSubject(@PathVariable("id") int id, @RequestBody Subject subject){
+        Subject subjectUpdated = subjectRepository.findById(id);
+        subjectUpdated.setTitle(subject.getTitle());
+        subjectUpdated.setCategoryId(subject.getCategoryId());
+
+        return this.subjectRepository.save(subjectUpdated);
+
+    }
 }
