@@ -4,13 +4,20 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule} from "@angular/common/http";
-import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,MatSortModule, MatTableModule,  MatDialogModule } from "@angular/material";
+import {
+  MatInputModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatSortModule,
+  MatTableModule,
+  MatDialogModule,
+  MatFormFieldModule
+} from "@angular/material";
 import { LessonComponent } from './lesson/lesson.component';
 import { SectionComponent } from './section/section.component';
 import { StudentComponent } from './student/student.component';
 import { SubjectComponent } from './subject/subject.component';
 import { AllStudentsComponent } from './student/all-students/all-students.component';
-import { AllStudentTableComponent } from './student/all-student-table/all-student-table.component';
 import { AddNewStudentComponent } from './student/add-new-student/add-new-student.component';
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MenuComponent} from "./shared/menu/menu.component";
@@ -22,6 +29,7 @@ import {MatListModule} from '@angular/material/list';
 import { AddNewSectionComponent } from './section/add-new-section/add-new-section.component';
 import { AddNewSubjectComponent } from './section/add-new-subject/add-new-subject.component';
 import { EditSubjectComponent } from './section/edit-subject/edit-subject.component';
+import { AllLessonsComponent } from './lesson/all-lessons/all-lessons.component';
 
 
 @NgModule({
@@ -32,14 +40,14 @@ import { EditSubjectComponent } from './section/edit-subject/edit-subject.compon
     StudentComponent,
     SubjectComponent,
     AllStudentsComponent,
-    AllStudentTableComponent,
     AddNewStudentComponent,
     MenuComponent,
     FooterComponent,
     EditStudentComponent,
     AddNewSectionComponent,
     AddNewSubjectComponent,
-    EditSubjectComponent
+    EditSubjectComponent,
+    AllLessonsComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +64,9 @@ import { EditSubjectComponent } from './section/edit-subject/edit-subject.compon
     ReactiveFormsModule,
     FlexLayoutModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatSortModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent],
