@@ -30,4 +30,9 @@ public class LessonController {
     public void delete(@PathVariable("id") int id){
         lessonRepository.deleteById(id);
     }
+
+    @GetMapping(path = "/{id}")
+    public Lesson findById(@PathVariable("id") int id){
+        return lessonRepository.findById(id);
+    }
 }
