@@ -2,6 +2,8 @@ package pl.pioro.teacherrestapi.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity(name = "lessons")
 public class Lesson {
@@ -12,7 +14,7 @@ public class Lesson {
     private int id;
 
     @Column(name = "date")
-    private Date date;
+    private LocalDateTime date;
 
     @Column(name = "day_of_week")
     private String dayOfWeek;
@@ -53,11 +55,11 @@ public class Lesson {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

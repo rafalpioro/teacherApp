@@ -36,4 +36,5 @@ public class SectionController {
     public Section findById(@PathVariable("id") int id){
         return sectionRepository.findById(id);
     }
+
 }
