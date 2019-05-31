@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 
 import {ApiLessonService} from "../../shared/api-lesson.service";
 
-import {MatSort, MatTableDataSource} from "@angular/material";
+import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
 import {Lesson} from "../../model/lesson";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -17,13 +18,15 @@ export class AllLessonsComponent implements OnInit {
   dataSource :  MatTableDataSource<Lesson>;
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private lessonService: ApiLessonService) {}
+  constructor(private lessonService: ApiLessonService, private router: Router) {}
 
   ngOnInit() {
     this.lessonService.allLessons().subscribe(value => {
       this.dataSource = new MatTableDataSource(value);
       this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
 
       this.dataSource.sortingDataAccessor = (item, property) => {
         switch (property) {
@@ -61,5 +64,9 @@ export class AllLessonsComponent implements OnInit {
 
   doFilter(filterValue: string){
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  addLesson(){
+    this.router.navigate(['lessons/add-lesson']);
   }
 }

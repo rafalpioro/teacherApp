@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 
 import {Observable} from "rxjs";
 import {Subject} from "../model/subject";
-import {Section} from "../model/section";
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +18,8 @@ export class ApiSubjectService {
     return this.http.post<Subject>(this.URL, subject);
   }
 
-  getSubjectById(id: number): Observable<Section>{
-    return this.http.get<Section>(this.URL +"/"+id);
+  getSubjectById(id: number): Observable<Subject>{
+    return this.http.get<Subject>(this.URL +"/"+id);
   }
 
   deleteSubject(id: number):Observable<any>{
@@ -29,4 +29,6 @@ export class ApiSubjectService {
   updateSubject(subject: Subject): Observable<any>{
     return this.http.put(this.URL +"/"+subject.id, subject);
   }
+
+
 }

@@ -1,0 +1,73 @@
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2 ">
+
+      <form name="form" #f="ngForm" novalidate class="clients-form" (ngSubmit)="f.form.valid && sendFeedback()" >
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="date">Data</label>
+            <input type="datetime-local" id="date" class="form-control" name="name" [(ngModel)]="model.date" #date="ngModel"
+                   [ngClass]="{'is-invalid': f.submitted && date.invalid}" required (ngModelChange)="onDateChange($event)"/>
+            <div *ngIf="f.submitted && date.invalid" class="invalid-input">
+              <div *ngIf="date.errors.required"> Name is invalid</div>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="dayOfWeek">Dzień tygodnia</label>
+            <input type="text" id="dayOfWeek" class="form-control" disabled name="dayOfWeek" [(ngModel)]="model.dayOfWeek" value="{{date.value | date : 'EEEE'}}"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="section">Dział</label>
+          <select id="section" class="form-control" name="section" [(ngModel)]="model.section" (ngModelChange)="onSectionChange($event)" >
+            <option *ngFor = "let section of sections" [ngValue]="section">{{section.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Temat</label>
+          <select id="subject" class="form-control" name="subject" [(ngModel)]="model.subject" (ngModelChange)="onSubjectChange($event)" >
+            <option *ngFor = "let subject of subjects" [ngValue]="subject">{{subject.title}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="content">Materiał przerobiony </label>
+          <textarea id="content" class="form-control" name="content" [(ngModel)]="model.content" ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="assignment">Cel nauki </label>
+          <textarea id="assignment" class="form-control" name="content" [(ngModel)]="model.assignment" ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="materials">Materiały </label>
+          <textarea id="materials" class="form-control" name="materials" [(ngModel)]="model.materials" ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="student">Uczeń</label>
+          <select id="student" class="form-control" name="student" [(ngModel)]="model.student" (ngModelChange)="onStudentChange($event)" >
+            <option *ngFor = "let student of students" [ngValue]="student">{{student.name}} {{student.surname}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="nextLesson">Następne Zajęcia </label>
+          <input type="datetime-local" id="nextLesson" class="form-control" name="nextLesson" [(ngModel)]="model.nextLesson"  />
+        </div>
+
+        <button type="submit"  class="btn btn-info pull-right">
+          <i class="fa fa-envelope-o"></i>
+          <span> Submit</span>
+        </button>
+      </form>
+      <div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {AllStudentsComponent} from "./student/all-students/all-students.component";
 import {AddNewStudentComponent} from "./student/add-new-student/add-new-student.component";
 import {SectionComponent} from "./section/section.component";
-import {AllLessonsComponent} from "./lesson/all-lessons/all-lessons.component";
+import {LessonComponent} from "./lesson/lesson.component";
+import {AddNewLessonComponent} from "./lesson/add-new-lesson/add-new-lesson.component";
 
 const routes: Routes = [ {
   path: 'students',
@@ -19,7 +20,11 @@ const routes: Routes = [ {
   },
   {
     path: 'lessons',
-    component: AllLessonsComponent
+    component: LessonComponent
+  },
+  {
+    path: 'lessons/add-lesson',
+    component: AddNewLessonComponent
   }
 ];
 

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule} from "@angular/common/http";
@@ -30,7 +30,15 @@ import { AddNewSectionComponent } from './section/add-new-section/add-new-sectio
 import { AddNewSubjectComponent } from './section/add-new-subject/add-new-subject.component';
 import { EditSubjectComponent } from './section/edit-subject/edit-subject.component';
 import { AllLessonsComponent } from './lesson/all-lessons/all-lessons.component';
+import { AddNewLessonComponent } from './lesson/add-new-lesson/add-new-lesson.component';
+import {ApiStudentService} from "./shared/api-student.service";
+import {ApiLessonService} from "./shared/api-lesson.service";
+import {ApiSectionService} from "./shared/api-section.service";
+import {ApiSubjectService} from "./shared/api-subject.service";
+import { registerLocaleData } from '@angular/common';
+import localePl from '@angular/common/locales/pl';
 
+registerLocaleData(localePl, 'pl');
 
 @NgModule({
   declarations: [
@@ -47,7 +55,8 @@ import { AllLessonsComponent } from './lesson/all-lessons/all-lessons.component'
     AddNewSectionComponent,
     AddNewSubjectComponent,
     EditSubjectComponent,
-    AllLessonsComponent
+    AllLessonsComponent,
+    AddNewLessonComponent
   ],
   imports: [
     BrowserModule,
@@ -66,10 +75,11 @@ import { AllLessonsComponent } from './lesson/all-lessons/all-lessons.component'
     MatIconModule,
     MatListModule,
     MatSortModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+
   ],
-  providers: [],
+  providers: [ApiStudentService, ApiLessonService, ApiSectionService, ApiSubjectService, {provide: LOCALE_ID, useValue: 'pl'}],
   bootstrap: [AppComponent],
   entryComponents: [EditStudentComponent, AddNewSectionComponent, AddNewSubjectComponent, EditSubjectComponent]
 })
-export class AppModule { }
+export class AppModule {}
