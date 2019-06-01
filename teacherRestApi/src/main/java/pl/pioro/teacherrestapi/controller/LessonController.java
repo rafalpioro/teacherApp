@@ -35,4 +35,21 @@ public class LessonController {
     public Lesson findById(@PathVariable("id") int id){
         return lessonRepository.findById(id);
     }
+
+    @PutMapping(path = "/{id}", consumes = "application/json")
+    public Lesson updateStudent(@PathVariable("id") int id, @RequestBody Lesson lesson) {
+        Lesson lessonUpdated = lessonRepository.findById(id);
+        lessonUpdated.setDate(lesson.getDate());
+        lessonUpdated.setAssignment(lesson.getAssignment());
+        lessonUpdated.setContent(lesson.getContent());
+        lessonUpdated.setDayOfWeek(lesson.getDayOfWeek());
+        lessonUpdated.setMaterials(lesson.getMaterials());
+        lessonUpdated.setNextLesson(lesson.getNextLesson());
+        lessonUpdated.setSection(lesson.getSection());
+        lessonUpdated.setSubject(lesson.getSubject());
+        lessonUpdated.setStudent(lesson.getStudent());
+
+
+        return this.lessonRepository.save(lessonUpdated);
+    }
 }
