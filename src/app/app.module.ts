@@ -11,7 +11,7 @@ import {
   MatSortModule,
   MatTableModule,
   MatDialogModule,
-  MatFormFieldModule
+  MatFormFieldModule, MatSelectModule, MatOptionModule
 } from "@angular/material";
 import { LessonComponent } from './lesson/lesson.component';
 import { SectionComponent } from './section/section.component';
@@ -37,6 +37,7 @@ import {ApiSectionService} from "./shared/api-section.service";
 import {ApiSubjectService} from "./shared/api-subject.service";
 import { registerLocaleData } from '@angular/common';
 import localePl from '@angular/common/locales/pl';
+import { EditLessonComponent } from './lesson/edit-lesson/edit-lesson.component';
 
 registerLocaleData(localePl, 'pl');
 
@@ -56,7 +57,8 @@ registerLocaleData(localePl, 'pl');
     AddNewSubjectComponent,
     EditSubjectComponent,
     AllLessonsComponent,
-    AddNewLessonComponent
+    AddNewLessonComponent,
+    EditLessonComponent
   ],
   imports: [
     BrowserModule,
@@ -76,10 +78,11 @@ registerLocaleData(localePl, 'pl');
     MatListModule,
     MatSortModule,
     MatFormFieldModule,
-
+    MatSelectModule,
+    MatOptionModule
   ],
   providers: [ApiStudentService, ApiLessonService, ApiSectionService, ApiSubjectService, {provide: LOCALE_ID, useValue: 'pl'}],
   bootstrap: [AppComponent],
-  entryComponents: [EditStudentComponent, AddNewSectionComponent, AddNewSubjectComponent, EditSubjectComponent]
+  entryComponents: [EditStudentComponent, AddNewSectionComponent, AddNewSubjectComponent, EditSubjectComponent, EditLessonComponent]
 })
 export class AppModule {}

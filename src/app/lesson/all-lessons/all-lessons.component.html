@@ -58,6 +58,14 @@
       <mat-cell *matCellDef="let lesson">{{lesson.nextLesson | date:'medium'}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Edycja</mat-header-cell>
+      <mat-cell *matCellDef="let lesson" >
+        <button (click)="deleteLesson(lesson)" class="btn btn-danger button"><i class="fa fa-trash"></i></button>
+        <button (click)="openDialog(lesson)"class="btn btn-primary button"><i class="fa fa-pencil"></i></button>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>

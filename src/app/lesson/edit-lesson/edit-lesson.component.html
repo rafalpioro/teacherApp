@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>Edycja lekci <span class="green">{{lesson.id}} </span></h2>
+<mat-dialog-content [formGroup]="form" fxLayout="column">
+
+  <div fxLayout="row wrap" fxLayoutGap="10px" fxLayout.lt-sm="column" >
+    <mat-form-field fxFlex="auto">
+      <input type="datetime-local" matInput formControlName="date"  [(ngModel)]="lesson.date" value={{lesson.date}} placeholder="Data" (ngModelChange)="onDateChange($event)">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="auto">
+      <input matInput formControlName="dayOfWeek"  [(ngModel)]="lesson.dayOfWeek" value={{lesson.dayOfWeek}} placeholder="Dzień tygodnia">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <mat-select formControlName="section"  [(ngModel)]="lesson.section" placeholder="Dział">
+      <mat-option *ngFor = "let section of sections"  [value]="section">{{section.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select  formControlName="subject" [(ngModel)]="lesson.subject"   placeholder="Temat">  <!--(ngModelChange)="onSubjectChange(subject)"-->
+      <mat-option *ngFor = "let subject of subjects"  [value]="subject">{{subject.title}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput formControlName="content" [(ngModel)]="lesson.content" value={{lesson.content}} placeholder="Materiał przerobiony"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput formControlName="assignment" [(ngModel)]="lesson.assignment" value={{lesson.assignment}} placeholder="Praca domowa"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput formControlName="materials" [(ngModel)]="lesson.materials" value={{lesson.materials}} placeholder="Materiały"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select  formControlName="student" [(ngModel)]="lesson.student" placeholder="Uczeń">  <!--(ngModelChange)="onStudentChange($event)"-->
+      <mat-option *ngFor = "let student of students" [value]="student">{{student.name}} {{student.surname}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field >
+    <input type="datetime-local" matInput formControlName="nextLesson" [(ngModel)]="lesson.nextLesson" value={{lesson.nextLesson}} placeholder="Następne zajęcia">
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button"(click)="close()">Close</button>
+  <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+</mat-dialog-actions>
+
