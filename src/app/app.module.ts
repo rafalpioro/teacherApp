@@ -38,6 +38,9 @@ import {ApiSubjectService} from "./shared/api-subject.service";
 import { registerLocaleData } from '@angular/common';
 import localePl from '@angular/common/locales/pl';
 import { EditLessonComponent } from './lesson/edit-lesson/edit-lesson.component';
+import { SliderComponent } from './shared/slider/slider.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MatCardModule} from '@angular/material/card'
 
 registerLocaleData(localePl, 'pl');
 
@@ -58,7 +61,8 @@ registerLocaleData(localePl, 'pl');
     EditSubjectComponent,
     AllLessonsComponent,
     AddNewLessonComponent,
-    EditLessonComponent
+    EditLessonComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +83,9 @@ registerLocaleData(localePl, 'pl');
     MatSortModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    NgbModule,
+    MatCardModule
   ],
   providers: [ApiStudentService, ApiLessonService, ApiSectionService, ApiSubjectService, {provide: LOCALE_ID, useValue: 'pl'}],
   bootstrap: [AppComponent],

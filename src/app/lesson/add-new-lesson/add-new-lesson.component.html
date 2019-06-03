@@ -5,6 +5,14 @@
     <div class="col-md-8 offset-md-2 ">
 
       <form name="form" #f="ngForm" novalidate class="clients-form" (ngSubmit)="f.form.valid && sendFeedback()" >
+
+        <div class="form-group">
+          <label for="student">Uczeń</label>
+          <select id="student" class="form-control" name="student" [(ngModel)]="model.student" (ngModelChange)="onStudentChange($event)" >
+            <option *ngFor = "let student of students" [ngValue]="student">{{student.name}} {{student.surname}}</option>
+          </select>
+        </div>
+
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="date">Data</label>
@@ -47,13 +55,6 @@
         <div class="form-group">
           <label for="materials">Materiały </label>
           <textarea id="materials" class="form-control" name="materials" [(ngModel)]="model.materials" ></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="student">Uczeń</label>
-          <select id="student" class="form-control" name="student" [(ngModel)]="model.student" (ngModelChange)="onStudentChange($event)" >
-            <option *ngFor = "let student of students" [ngValue]="student">{{student.name}} {{student.surname}}</option>
-          </select>
         </div>
 
         <div class="form-group">

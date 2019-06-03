@@ -1,4 +1,8 @@
 a{
   color: white;
-  padding: 5px;
+  padding: 10px;
+}
+
+.bg-green{
+  background-color: darkslategray;
 }

@@ -17,6 +17,10 @@ export class ApiLessonService {
     return this.http.get<[]>(this.URL);
   }
 
+  findTodayLesson(): Observable<Lesson[]>{
+    return this.http.get<[]>(this.URL+"/today");
+  }
+
   addNewLesson(lesson: Lesson):Observable<any>{
     return this.http.post<Lesson[]>(this.URL, lesson);
   }

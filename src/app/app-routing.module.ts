@@ -5,6 +5,8 @@ import {AddNewStudentComponent} from "./student/add-new-student/add-new-student.
 import {SectionComponent} from "./section/section.component";
 import {LessonComponent} from "./lesson/lesson.component";
 import {AddNewLessonComponent} from "./lesson/add-new-lesson/add-new-lesson.component";
+import {SliderComponent} from "./shared/slider/slider.component";
+
 
 const routes: Routes = [ {
   path: 'students',
@@ -25,6 +27,10 @@ const routes: Routes = [ {
   {
     path: 'lessons/add-lesson',
     component: AddNewLessonComponent
+  },
+  {
+    path: '',
+    component: SliderComponent
   }
 ];
 
