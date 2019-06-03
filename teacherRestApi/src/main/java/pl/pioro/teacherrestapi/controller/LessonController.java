@@ -6,6 +6,7 @@ import pl.pioro.teacherrestapi.entity.Lesson;
 import pl.pioro.teacherrestapi.repository.LessonRepository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping(path = "/lessons", produces = "application/json")
@@ -19,6 +20,14 @@ public class LessonController {
     @GetMapping
     public Iterable<Lesson> findAll(){
         return lessonRepository.findAll();
+    }
+
+    @GetMapping("/today")
+    public Iterable<Lesson> findTodayLesson(){
+        LocalDateTime today = LocalDateTime.now();
+        LocalDateTime tomorrow = today.plusDays(1);
+        LocalDateTime yesterday = today.minusDays(1);
+        return lessonRepository.findByDateBetween(yesterday, tomorrow);
     }
 
     @PostMapping(consumes = "application/json")
